@@ -6,10 +6,7 @@ on:
       - main
       - 'feature/*'
 
-permissions:
-  checks: write
-  actions: read
-  contents: read
+permissions: write-all
 
 jobs:
   build:
@@ -27,7 +24,11 @@ jobs:
     - name: Build with Maven
       run: mvn --batch-mode --update-snapshots package
 
-   
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      if: always()
+      with:
+        files: target/**/*.xml
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.4
