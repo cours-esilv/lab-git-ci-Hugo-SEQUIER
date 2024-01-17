@@ -1,5 +1,3 @@
-name : First Pipeline
-
 on:
   - push
   - workflow_dispatch
